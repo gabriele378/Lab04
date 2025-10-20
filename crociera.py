@@ -8,7 +8,7 @@ class Crociera:
     def __init__(self, nome):
         """Inizializza gli attributi e le strutture dati"""
         # TODO
-        self.nome = nome
+        self._nome = nome
         self.passeggeri = []
         self.cabine = []
         self.animali = []
@@ -18,11 +18,11 @@ class Crociera:
     # TODO
     @property
     def nome(self):
-        return self.nome
+        return self._nome
 
     @nome.setter
     def nome(self, nuovo_nome):
-        self.nome = nuovo_nome
+        self._nome = nuovo_nome
 
     def carica_file_dati(self, file_path):
         """Carica i dati (cabine e passeggeri) dal file"""
@@ -64,20 +64,54 @@ class Crociera:
                         cabine_deluxe = Deluxe(codice, letti, ponte, prezzo, tipologia)
                         self.deluxe.append(cabine_deluxe)
 
-
-
-
-
+        except FileNotFoundError:
+            return ("File non trovato")
 
 
 
     def assegna_passeggero_a_cabina(self, codice_cabina, codice_passeggero):
         """Associa una cabina a un passeggero"""
         # TODO
+        #CERCO LA CABINA
+        cabina_trovata = None
+        for cabina in self.cabine:
+            if cabina.codice == codice_cabina:
+                cabina_trovata = cabina
+
+        if cabina_trovata is None:
+            print("Cabina non trovata")
+            return
+
+        #CERCO IL PASSEGGERO
+        passeggero_trovato = None
+        for passeggero in self.passeggeri:
+            if passeggero.codice == codice_passeggero:
+                passeggero_trovato = passeggero
+
+        if passeggero_trovato is None:
+            print("Passeggero non trovato")
+            return
+
+        # CONTROLLA SE LA CABINA E' DISPONIBILE
+        if cabina_trovata.disponibile == False:
+            print("La cabina non è disponibile")
+            return
+
+        # CONTROLLA SE IL PASSEGGERO HA GIA' UNA CABINA
+        if passeggero_trovato.cabina is not None:
+            print("Il passeggero ha già una cabina assegnata")
+            return
+
+        cabina_trovata.disponibile = False
+        cabina_trovata.passeggero = passeggero_trovato
+        passeggero_trovato.cabina = cabina_trovata
+
+
 
     def cabine_ordinate_per_prezzo(self):
         """Restituisce la lista ordinata delle cabine in base al prezzo"""
         # TODO
+        return sorted(self.cabine)
 
 
     def elenca_passeggeri(self):

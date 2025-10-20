@@ -4,6 +4,8 @@ class Cabine:
         self.letti = letti
         self.ponte = ponte
         self.prezzo = prezzo
+        self.disponibile = True
+        self.passeggero = None
 
     def __str__(self):
         return f'{self.codice} {self.letti} {self.ponte} {self.prezzo}'
@@ -11,3 +13,6 @@ class Cabine:
     def __repr__(self):
         return (f'{self.__class__.__name__}'
                 f'codice = {self.codice}, letti = {self.letti}, prezzo = {self.prezzo}')
+
+    def __lt__(self, other):
+        return self.prezzo < other.prezzo
