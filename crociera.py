@@ -46,7 +46,7 @@ class Crociera:
                         cabina = Cabine(codice, letti, ponte, prezzo)
                         self.cabine.append(cabina)
 
-                    elif len(line) == 5 and line[-1] == int:
+                    elif len(line) == 5 and line[4].isdigit():
                         codice = line[0]
                         letti = line[1]
                         ponte = line[2]
@@ -93,7 +93,7 @@ class Crociera:
             return
 
         # CONTROLLA SE LA CABINA E' DISPONIBILE
-        if cabina_trovata.disponibile == False:
+        if not cabina_trovata.disponibile:
             print("La cabina non è disponibile")
             return
 
@@ -111,10 +111,19 @@ class Crociera:
     def cabine_ordinate_per_prezzo(self):
         """Restituisce la lista ordinata delle cabine in base al prezzo"""
         # TODO
-        return sorted(self.cabine)
+        # CREO UNA LISTA CHE CONTIENE TUTTE LE CABINE AL SUO INTERNO
+        tutte_Cabine = self.cabine + self.animali + self.deluxe
+        return sorted(tutte_Cabine)
 
 
     def elenca_passeggeri(self):
         """Stampa l'elenco dei passeggeri mostrando, per ognuno, la cabina a cui è associato, quando applicabile """
         # TODO
+        for passeggero in self.passeggeri:
+            if passeggero.cabina is not None:
+                print(f" {passeggero.codice} {passeggero.nome} {passeggero.cognome} ha la cabina {passeggero.cabina} ")
+            else:
+                print(f"{passeggero.codice} {passeggero.nome} {passeggero.cognome} non ha ancora una cabina assegnata")
 
+
+        return

@@ -3,7 +3,7 @@ class Passeggeri:
         self.codice = codice
         self.nome = nome
         self.cognome = cognome
-        self.cabine = None
+        self.cabina = None
 
     def __str__(self):
         return f'{self.codice} {self.nome} {self.cognome}'

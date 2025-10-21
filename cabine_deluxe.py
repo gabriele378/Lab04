@@ -4,6 +4,7 @@ class Deluxe(Cabine):
     def __init__(self, codice, letti, ponte, prezzo, tipologia):
         super().__init__(codice, letti ,ponte, prezzo)
         self.tipologia = tipologia
+        self.incremento_prezzo()
 
     def __str__(self):
         return f'{super().__str__()}, {self.tipologia}'

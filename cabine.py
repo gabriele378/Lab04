@@ -3,7 +3,7 @@ class Cabine:
         self.codice = codice
         self.letti = letti
         self.ponte = ponte
-        self.prezzo = prezzo
+        self.prezzo = float(prezzo)
         self.disponibile = True
         self.passeggero = None
 
@@ -16,3 +16,6 @@ class Cabine:
 
     def __lt__(self, other):
         return self.prezzo < other.prezzo
+
+    def incremento_prezzo(self):
+        self.prezzo = self.prezzo
